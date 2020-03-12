@@ -2,15 +2,15 @@
 
 const {expect} = require('chai')
 const db = require('../index')
-const User = db.model('user')
+const Bow = db.model('bow')
 
-describe('User model', () => {
+describe('Bow model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
   describe('instanceMethods', () => {
-    describe('correctPassword', () => {
+    describe('peakDrawWeight', () => {
       let cody
 
       beforeEach(async () => {

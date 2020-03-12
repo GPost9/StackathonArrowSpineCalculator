@@ -1,18 +1,53 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {Bow, Arrow} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+  // const users = await Promise.all([
+  //   User.create({email: 'cody@email.com', password: '123'}),
+  //   User.create({email: 'murphy@email.com', password: '123'})
+  // ])
+
+  const bows = await Promise.all([
+    Bow.create({
+      centershot: 'on-center',
+      drawWeight: 30,
+      drawLength: 28
+    }),
+    Bow.create({
+      centershot: 'past-center',
+      drawWeight: 30,
+      drawLength: 28
+    })
   ])
 
-  console.log(`seeded ${users.length} users`)
+  const arrows = await Promise.all([
+    Arrow.create({
+      material: 'carbon',
+      spine: 500,
+      arrowLength: 30,
+      pointWeight: 145
+    }),
+    Arrow.create({
+      material: 'aluminum',
+      spine: 1916,
+      arrowLength: 30,
+      pointWeight: 145
+    }),
+    Arrow.create({
+      material: 'wood',
+      spine: 30 - 35,
+      arrowLength: 30,
+      pointWeight: 145
+    })
+  ])
+
+  console.log(`seeded ${bows.length} bows`)
+  console.log(`seeded ${arrows.length} arrows`)
   console.log(`seeded successfully`)
 }
 
